@@ -1,6 +1,7 @@
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { authenticateUser } from "../pages/lib/authenticateUser";
 
 export default function Login() {
     const [ userName, setUserName ] = useState('');
@@ -9,9 +10,14 @@ export default function Login() {
 
     function handleSubmit(e) {
         e.preventDefault();  // prevent the page to reload on submit
-        console.log(`user submitted the form. Name:${userName} Password: ${password}`);
-        router.push('/dashboard');
-    }
+        // console.log(`user submitted the form. Name:${userName} Password: ${password}`);
+        authenticateUser(userName, password).then(() => {
+          console.log('Success! User passed Authentication process.')
+          router.push('/dashboard');
+        }).catch((err) => {
+          alert(err.message); // Show error message
+        })
+    };
 
     return (
     <Container className="mt-4">
