@@ -1,13 +1,13 @@
 import "@/styles/globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import RouteGuard from "./components/RouteGuard";
+// import RouteGuard from "../pages/components/RouteGuard";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <RouteGuard>
+      {/* <RouteGuard> */}
           <Component {...pageProps} />;
-      </RouteGuard>
+      {/* </RouteGuard> */}
     </>
   )
 }

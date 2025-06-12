@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { isAuthenticated } from '../lib/authenticateUser'; // custom auth checker (returns true if token exists and valid)
 
-const PUBLIC_PATHS = ['/login', '/', '/_error', '/404']; // pages that don't require authentication
+const PUBLIC_PATHS = ['/login', '/', '/_error', '404.js']; // pages that don't require authentication
 
 export default function RouteGuard(props) {
     const router = useRouter();
@@ -29,7 +29,7 @@ export default function RouteGuard(props) {
         // if the user is not authenticated and tries to access a protected route
         if (!isAuthenticated() && !PUBLIC_PATHS.includes(path)) {
             setAuthorized(false); // hide the page content
-            router.push("/"); // redirect to home page
+            router.push("/login"); // redirect to login page
         } else {
             setAuthorized(true); // allow access and render page content
         }

@@ -12,7 +12,8 @@ export async function authenticateUser(user, password) {
   const data = await res.json();
 
   if (res.status === 200) {
-    localStorage.setItem('token', data.token); // Store JWT locally
+    localStorage.setItem('access_token', data.token); // Store JWT locally
+    console.log("Token received:", data.token);
     return true;
   } else {
     throw new Error(data.error || 'Login failed');
@@ -20,7 +21,7 @@ export async function authenticateUser(user, password) {
 }
 
 export function isAuthenticated() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('access_token');
   if(!token) return false;
 
   try {

@@ -9,15 +9,15 @@ export default function Login() {
     const router = useRouter();
 
     function handleSubmit(e) {
-        e.preventDefault();  // prevent the page to reload on submit
-        // console.log(`user submitted the form. Name:${userName} Password: ${password}`);
-        authenticateUser(userName, password).then(() => {
-          console.log('Success! User passed Authentication process.')
-          router.push('/dashboard');
-        }).catch((err) => {
-          alert(err.message); // Show error message
-        })
-    };
+    e.preventDefault(); // prevent the page from reloading
+    authenticateUser(userName, password).then(() => {
+      console.log('✅ Auth success');
+      router.push('/dashboard'); // SPA behavior
+    }).catch((err) => {
+      alert(err.message);
+    });
+}
+
 
     return (
     <Container className="mt-4">
