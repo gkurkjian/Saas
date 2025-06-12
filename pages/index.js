@@ -1,5 +1,4 @@
 import { Container, Row, Col } from "react-bootstrap";
-import Login from "../pages/login";
 
 export default function Home() {
   return (
@@ -11,7 +10,6 @@ export default function Home() {
           <h4>For password enter: <b>myPassword</b></h4>
       </Row>
 
-      <Login />
     </Container>
   );
 }
