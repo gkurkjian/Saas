@@ -1,7 +1,7 @@
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { authenticateUser } from "../pages/lib/authenticateUser";
+import { authenticateUser } from "../lib/authenticateUser";
 
 export default function Login() {
     const [ userName, setUserName ] = useState('');

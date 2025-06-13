@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { readToken, removeToken } from '../lib/authenticateUser'
+import { readToken, removeToken } from '../../lib/authenticateUser'
 
 export default function Navigation() {
   const [token, setToken] = useState(null)

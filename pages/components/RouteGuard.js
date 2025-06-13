@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { isAuthenticated } from '../lib/authenticateUser'; // custom auth checker (returns true if token exists and valid)
+import { isAuthenticated } from '../../lib/authenticateUser'; // custom auth checker (returns true if token exists and valid)
 
 const PUBLIC_PATHS = ['/login', '/', '/_error', '404.js']; // pages that don't require authentication
 

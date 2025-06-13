@@ -1,4 +1,4 @@
-import { connect } from '../../lib/user-auth'
+import { connect } from '../../../lib/user-auth'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
