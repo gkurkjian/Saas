@@ -1,40 +1,147 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🚀 SaaS Authentication App – Next.js 15 + React 19 + MongoDB + JWT
 
-## Getting Started
+A full-stack authentication system built using the latest **Next.js 15.3.3**, **React 19.1.0**, **React Bootstrap**, **MongoDB**, and **JWT**.  
+It allows users to **register**, **log in**, and access a protected **dashboard** via **token-based authentication**.
 
-First, run the development server:
+---
+
+## 📦 Tech Stack
+
+- ✅ **Next.js 15.3.3**
+- ✅ **React 19.1.0**
+- ✅ **React Bootstrap 2.10.10**
+- ✅ **MongoDB (NoSQL)** + **Mongoose**
+- ✅ **JWT Authentication**
+- ✅ **bcryptjs** – Secure password hashing
+- ✅ **jsonwebtoken** – Create/verify tokens
+- ✅ **jwt-decode** – Decode JWTs client-side
+- ✅ **LocalStorage** token storage (`access_token`)
+
+---
+
+## ✨ Features
+
+### 🔐 User Registration
+
+- Inputs: Full Name, Username, Password
+- Passwords hashed using `bcryptjs`
+- Checks for existing usernames
+- On success:
+  - JWT token is generated
+  - Stored in `localStorage` as `access_token`
+  - User redirected to `/dashboard`
+
+### 🔐 User Login
+
+- Authenticates with username and password
+- Token is signed with your `JWT_SECRET`
+- Token includes: `userId`, `userName`, `role`, `exp`
+- Stored in `localStorage` as `access_token`
+
+### 🧠 Token Handling
+
+Centralized in `lib/authenticateUser.js`:
+
+- `setToken(token)` – Store token in `localStorage`
+- `getToken()` – Read token from `localStorage`
+- `readToken()` – Decode and validate token
+- `removeToken()` – Remove token
+- `isAuthenticated()` – Check expiry
+
+### 🔒 Protected Dashboard
+
+- Route `/dashboard` checks token on page load
+- If token is missing or expired, redirects to `/login`
+- Displays "Welcome, [username]!" using token data
+
+---
+
+## 🗂 Folder Structure
+
+```
+/pages
+  ├── index.js            # Landing page
+  ├── login.js            # Login screen
+  ├── register.js         # Registration screen
+  ├── dashboard.js        # Protected route
+  └── api
+      └── auth
+          ├── login.js    # POST login
+          └── register.js # POST register
+
+/lib
+  ├── user-auth.js        # Mongoose model + helper functions
+  └── authenticateUser.js # Token utility functions
+```
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env.local` file at your project root:
+
+```env
+MONGO_DB_CONNECTION=your_mongodb_connection_string
+JWT_SECRET=your_super_long_random_string_1234567890!@#$%^
+```
+
+Then restart the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## 💻 How to Run
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+1. Install dependencies:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Start the dev server:
 
-## Learn More
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+3. Visit your app at:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```
+http://localhost:3000
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+✅ MongoDB must be running locally or your remote URI should be correct in `.env.local`.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧪 Demo Credentials
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Use this account without registering:
+
+```
+Username: bob
+Password: myPassword
+```
+
+---
+
+## 🛡 Security Notice
+
+- Tokens are stored in `localStorage` for simplicity.
+- For production, consider storing tokens in **httpOnly cookies** for better security.
+- Keep `JWT_SECRET` long and private.
+
+---
+
+## 📄 License
+
+MIT – Free to use and adapt.
+
+---
+
+## ❤️ Contribute
+
+PRs and suggestions welcome. Build your SaaS faster, safer, better!
