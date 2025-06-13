@@ -3,16 +3,23 @@ const bcrypt = require('bcryptjs');
 
 let mongoDBConnectionString = process.env.MONGO_DB_CONNECTION;
 
-let Schema = mongoose.Schema;
+// let Schema = mongoose.Schema;
+// 
+// let userSchema = new Schema({
+//     userName: {
+//         type: String,
+//         unique: true
+//     },
+//     password: String,
+//     fullName: String,
+//     role: String
+// });
 
-let userSchema = new Schema({
-    userName: {
-        type: String,
-        unique: true
-    },
-    password: String,
-    fullName: String,
-    role: String
+const userSchema = new mongoose.Schema({
+  userName: { type: String, unique: true },
+  password: String,
+  fullName: String,
+  role: String,
 });
 
 let User;
@@ -27,7 +34,7 @@ module.exports.connect = function () {
 
         db.once('open', () => {
             User = db.model("users", userSchema);
-            resolve();
+            resolve(User);  // Return new user, if needed
         });
     });
 };

@@ -1,14 +1,32 @@
+'use client'
+import { useState, useEffect } from 'react'
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { readToken, removeToken } from '../lib/authenticateUser'
 
 export default function Navigation() {
-  const router = useRouter();
-  let token = readToken();
-    
-  function logout() {
+  const [token, setToken] = useState(null)
+  const router = useRouter()
+
+useEffect(() => {
+  const handleRouteChange = () => {
+    const decoded = readToken()
+    setToken(decoded)
+  }
+
+  handleRouteChange() // run on initial mount
+
+  router.events?.on('routeChangeComplete', handleRouteChange)
+
+  return () => {
+    router.events?.off('routeChangeComplete', handleRouteChange)
+  }
+}, [router])
+
+  const logout = () => {
     removeToken()
+    setToken(null)
     router.push('/')
   }
 
